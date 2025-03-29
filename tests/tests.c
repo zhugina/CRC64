@@ -1,0 +1,38 @@
+#include <assert.h>
+#include <stdio.h>
+#include <string.h>
+#include "crc64.h"
+
+void test_crc64()
+{
+    const char *test1 = "Hello, world!";
+    uint64_t result1 = 0x1F73C2ABCF65431E;
+    assert(crc64(test1, strlen(test1)) == result1);
+
+    const uint8_t test2[] = {
+        0x53, 0x69, 0x6c, 0x6d, 0x61, 0x72, 0x69, 0x6c,
+        0x6c, 0x69, 0x6f, 0x6e};
+    uint64_t result2 = 0x0320154E5DD39B00;
+    assert(crc64(test2, sizeof(test2)) == result2);
+
+    const uint8_t test3[] = {
+        0xd0, 0x9f, 0xd1, 0x80, 0xd0, 0xbe, 0xd1, 0x81,
+        0xd1, 0x82, 0xd0, 0xbe, 0x20, 0xd0, 0xb2, 0xd1,
+        0x81, 0xd1, 0x82, 0xd0, 0xb0, 0xd1, 0x8e, 0x20,
+        0xd0, 0xb8, 0x20, 0xd0, 0xb4, 0xd0, 0xb5, 0xd1,
+        0x80, 0xd1, 0x83, 0xd1, 0x81, 0xd1, 0x8c};
+    uint64_t result3 = 0x90C72A24B5A6A1A1;
+    assert(crc64(test3, sizeof(test3)) == result3);
+
+    const char *test4 = "CRC64_ECMA_182";
+    uint64_t result4 = 0x5D364CA1F962351C;
+    assert(crc64(test4, strlen(test4)) == result4);
+
+    printf("All tests passed successful!");
+}
+
+int main()
+{
+    test_crc64();
+    return 0;
+}

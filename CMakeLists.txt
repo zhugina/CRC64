@@ -3,8 +3,8 @@ project(CRC64 C)
 
 set(CMAKE_C_STANDARD 11)
 
-set(INCLUDES
-    include/crc64.h
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
 )
 
 set(SOURCES
@@ -12,7 +12,5 @@ set(SOURCES
     tests/tests.c
 )
 
-add_executable(test_crc64
-    ${INCLUDES}
-    ${SOURCES}
+add_executable(test_crc64 ${SOURCES}
 )
